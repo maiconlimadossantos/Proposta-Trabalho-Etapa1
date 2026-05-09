@@ -20,7 +20,7 @@ return new class extends Migration
             $table->times('duracao');
             $table->boolean('legendado')->default(false);
             $table->boolean('dublado')->default(false);
-            $table->boolean('disponivel')->(true);
+            $table->boolean('disponivel')->default(true);
             $table->timestamps();
         });
     }
