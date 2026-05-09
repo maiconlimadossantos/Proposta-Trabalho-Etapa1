@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('ano_lancamento');
             $table->integer('temporadas');
             $table->times('duracao');
+            $table->boolean('legendado')->default(false);
+            $table->boolean('dublado')->default(false);
+            $table->boolean('disponivel')->default(true);
             $table->timestamps();
         });
     }
