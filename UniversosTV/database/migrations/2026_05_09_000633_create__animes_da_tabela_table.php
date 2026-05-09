@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('_animes_da_tabela', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->string('estudio');
+            $table->integer('ano_lancamento');
+            $table->integer('episodios');
+            $table->times('duracao');
             $table->timestamps();
         });
     }
