@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_generos_da_tabela', function (Blueprint $table) {
+        Schema::create('_perfis_da_tabela', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nome');
-            $table->string('descricao');
-            $table->string('icone')->nullable();
-            $table->boolean('ativo')->default(true);
-            $table->string('cor')->nullable();
+            $table->string('avatar')->nullable();
+            $table->boolean('is_infatil')->default(false);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_generos_da_tabela');
+        Schema::dropIfExists('_perfis_da_tabela');
     }
 };
