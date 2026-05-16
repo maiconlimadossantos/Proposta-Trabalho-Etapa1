@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Genero;
 use Illuminate\Database\Eloquent\Model;
 
 class Filme extends Model
