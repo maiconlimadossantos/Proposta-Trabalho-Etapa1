@@ -11,7 +11,9 @@ class Genero extends Model
     protected $fillable = [
         'nome',
         'descricao',
-        
+        'icone',
+        'ativo',
+        'cor',
     ];
 
      public function filmes()
