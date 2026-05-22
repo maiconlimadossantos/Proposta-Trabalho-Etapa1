@@ -30,4 +30,8 @@ class Genero extends Model
     {
         return $this->hasMany(Novela::class, 'genero_id');
     }
+    public Function series()
+    {
+        return $this->hasMany(Serie::class, 'genero_id');
+    }
 }
