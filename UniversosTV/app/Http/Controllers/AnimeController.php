@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AnimeRequest;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 
@@ -13,13 +14,19 @@ class AnimeController extends Controller
         return view('animes.index', compact('animes'));
     }
 
-    public function show($id)
+    public function showall()
     {
-        $anime=Anime::With('genero')->get()->find($id);
+        $anime=Anime::With('genero')->get();
         return view('animes.show', compact('anime'));
     }
-    public function Update()
+    public function Update(Request $AnimeRequest, $idAnime)
     {
-       
+        $anime = Anime::find($idAnime);
+        $anime->Update(['Anime'=>$AnimeRequest->Anime]);
+    }
+    public function destroy($idAnime)
+    {
+        $anime = Anime::find($idAnime);
+        $anime->delete();
     }
 }
