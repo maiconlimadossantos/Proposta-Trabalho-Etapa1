@@ -19,6 +19,11 @@ class AnimeController extends Controller
         $anime=Anime::With('genero')->get();
         return view('animes.show', compact('anime'));
     }
+    public function store(AnimeRequest $request)
+    {
+        Anime::create($request->validated());
+        return redirect()->route('animes.index')->with('success', 'Anime criado com sucesso!');
+    }
     public function Update(Request $AnimeRequest, $idAnime)
     {
         $anime = Anime::find($idAnime);

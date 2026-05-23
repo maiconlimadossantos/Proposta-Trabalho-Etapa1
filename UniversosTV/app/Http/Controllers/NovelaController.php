@@ -18,6 +18,11 @@ class NovelaController extends Controller
         $novela=Novela::With('genero')->get();
         return view('novelas.show', compact('novela'));
     }
+    public function store(Request $NovelaRequest)
+    {
+        Novela::create($NovelaRequest->validated());
+        return redirect()->route('novelas.index')->with('success', 'Novela criada com sucesso!');
+    }
     public function Update(Request $NovelaRequest, $idNovela)
     {
         $novela = Novela::find($idNovela);

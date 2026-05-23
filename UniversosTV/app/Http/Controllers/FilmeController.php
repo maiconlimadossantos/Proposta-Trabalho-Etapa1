@@ -18,6 +18,11 @@ class FilmeController extends Controller
             $filme=Filme::With('genero')->get();
             return view('filmes.show', compact('filme'));
         }
+        public function store(Request $FilmeRequest)
+        {
+            Filme::create($FilmeRequest->validated());
+            return redirect()->route('filmes.index')->with('success', 'Filme criado com sucesso!');
+        }
         public function Update(Request $FilmeRequest, $idFilme)
         {
             $filme = Filme::find($idFilme);
