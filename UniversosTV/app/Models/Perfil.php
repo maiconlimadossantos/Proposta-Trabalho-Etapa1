@@ -10,8 +10,9 @@ class Perfil extends Model
 
     protected $fillable = [
         'nome',
-        'descricao',
+        'user_id',
         'avatar',
+        'is_infantil',
     ];
 
      public function usuarios()
