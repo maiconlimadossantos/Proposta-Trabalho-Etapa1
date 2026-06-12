@@ -6,25 +6,37 @@ use Illuminate\Http\Request;
 use App\Models\PerfilTitulo;
 class PerfilTituloController extends Controller
 {
-    public function index()
+   public function index()
     {
         $perfilTitulos = PerfilTitulo::all();
         return view('perfilTitulos.index', compact('perfilTitulos'));
     }
 
-    public function store(Request $PerfilTituloRequest)
+    public function create()
     {
-        PerfilTitulo::create($PerfilTituloRequest->validated());
-        return redirect()->route('perfilTitulos.index')->with('success', 'PerfilTitulo criado com sucesso!');
+        return view('perfilTitulos.create');
     }
-    public function Update(Request $PerfilTituloRequest, $idPerfilTitulo)
+
+    public function store(Request $request)
     {
-        $perfilTitulo = PerfilTitulo::find($idPerfilTitulo);
-        $perfilTitulo->Update(['PerfilTitulo'=>$PerfilTituloRequest->PerfilTitulo]);
+        PerfilTitulo::create($request->all());
+        return redirect()->route('perfilTitulos.index')->with('success', 'PerfilTitulo adicionado com sucesso!');
     }
-    public function destroy($idPerfilTitulo)
+
+    public function edit(PerfilTitulo $perfilTitulo)
     {
-        $perfilTitulo = PerfilTitulo::find($idPerfilTitulo);
+        return view('perfilTitulos.edit', compact('perfilTitulo'));
+    }
+
+    public function update(Request $request, PerfilTitulo $perfilTitulo)
+    {
+        $perfilTitulo->update($request->all());
+        return redirect()->route('perfilTitulos.index')->with('success', 'PerfilTitulo atualizado com sucesso!');
+    }
+
+    public function destroy(PerfilTitulo $perfilTitulo)
+    {
         $perfilTitulo->delete();
+        return redirect()->route('perfilTitulos.index')->with('success', 'PerfilTitulo removido com sucesso!');
     }
 }

@@ -12,19 +12,31 @@ class PerfilController extends Controller
         return view('perfis.index', compact('perfis'));
     }
 
-    public function store(Request $PerfilRequest)
+    public function create()
     {
-        Perfil::create($PerfilRequest->validated());
-        return redirect()->route('perfis.index')->with('success', 'Perfil criado com sucesso!');
+        return view('perfis.create');
     }
-    public function Update(Request $PerfilRequest, $idPerfil)
+
+    public function store(Request $request)
     {
-        $perfil = Perfil::find($idPerfil);
-        $perfil->Update(['Perfil'=>$PerfilRequest->Perfil]);
+        Perfil::create($request->all());
+        return redirect()->route('perfis.index')->with('success', 'Perfil adicionado com sucesso!');
     }
-    public function destroy($idPerfil)
+
+    public function edit(Perfil $perfil)
     {
-        $perfil = Perfil::find($idPerfil);
+        return view('perfis.edit', compact('perfil'));
+    }
+
+    public function update(Request $request, Perfil $perfil)
+    {
+        $perfil->update($request->all());
+        return redirect()->route('perfis.index')->with('success', 'Perfil atualizado com sucesso!');
+    }
+
+    public function destroy(Perfil $perfil)
+    {
         $perfil->delete();
+        return redirect()->route('perfis.index')->with('success', 'Perfil removido com sucesso!');
     }
 }

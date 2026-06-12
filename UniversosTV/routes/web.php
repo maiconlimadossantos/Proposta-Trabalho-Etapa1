@@ -9,6 +9,8 @@ use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\SerieController;
 use App\Http\Controllers\NovelaController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PerfilTituloController;
 
 // Rotas de Autenticação (Página de Login)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
@@ -35,4 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('serie', SerieController::class);
    //CRUD de Novela (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
     Route::resource('novela', NovelaController::class);
+
+    //CRUD de Perfil (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('perfil', PerfilController::class);
+
+    //CRUD de Perfil titulo (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('perfil-titulo', PerfilTituloController::class);
 });
