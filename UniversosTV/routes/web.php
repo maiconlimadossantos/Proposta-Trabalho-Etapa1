@@ -5,6 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\FilmeController;
+use App\Http\Controllers\SerieController;
+use App\Http\Controllers\NovelaController;
 
 // Rotas de Autenticação (Página de Login)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
@@ -21,4 +25,14 @@ Route::middleware('auth')->group(function () {
 
     // CRUD de Gêneros (2. LINHA ADICIONADA: Cria dinamicamente as rotas genders.index, create, store, edit, update, destroy)
     Route::resource('genero', GeneroController::class);
+
+    //CRUD de Anime (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('anime', AnimeController::class);
+
+    //CRUD de Filme (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('filme', FilmeController::class);
+    //CRUD de Série (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('serie', SerieController::class);
+   //CRUD de Novela (2. LINHA ADICIONADA: Cria dinamicamente as rotas contents.index, create, store, edit, update, destroy)
+    Route::resource('novela', NovelaController::class);
 });

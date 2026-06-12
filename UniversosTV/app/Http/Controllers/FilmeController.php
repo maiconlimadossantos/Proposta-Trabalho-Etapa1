@@ -7,30 +7,37 @@ use Illuminate\Http\Request;
 
 class FilmeController extends Controller
 {
-        public function index()
-        {
-            $filmes = Filme::all();
-            return view('filmes.index', compact('filmes'));
-        }
+    public function index()
+    {
+        $filmes = Filme::all();
+        return view('filmes.index', compact('filmes'));
+    }
 
-        public function showall()
-        {
-            $filme=Filme::With('genero')->get();
-            return view('filmes.show', compact('filme'));
-        }
-        public function store(Request $FilmeRequest)
-        {
-            Filme::create($FilmeRequest->validated());
-            return redirect()->route('filmes.index')->with('success', 'Filme criado com sucesso!');
-        }
-        public function Update(Request $FilmeRequest, $idFilme)
-        {
-            $filme = Filme::find($idFilme);
-            $filme->Update(['Filme'=>$FilmeRequest->Filme]);
-        }
-        public function destroy($idFilme)
-        {
-            $filme = Filme::find($idFilme);
-            $filme->delete();
-        }
+    public function create()
+    {
+        return view('filmes.create');
+    }
+
+    public function store(Request $request)
+    {
+        Filme::create($request->all());
+        return redirect()->route('filmes.index')->with('success', 'Filme adicionado com sucesso!');
+    }
+
+    public function edit(Filme $filme)
+    {
+        return view('filmes.edit', compact('filme'));
+    }
+
+    public function update(Request $request, Filme $filme)
+    {
+        $filme->update($request->all());
+        return redirect()->route('filmes.index')->with('success', 'Filme atualizado com sucesso!');
+    }
+
+    public function destroy(Filme $filme)
+    {
+        $filme->delete();
+        return redirect()->route('filmes.index')->with('success', 'Filme removido com sucesso!');
+    }
 }

@@ -14,24 +14,31 @@ class AnimeController extends Controller
         return view('animes.index', compact('animes'));
     }
 
-    public function showall()
+    public function create()
     {
-        $anime=Anime::With('genero')->get();
-        return view('animes.show', compact('anime'));
+        return view('animes.create');
     }
+
     public function store(AnimeRequest $request)
     {
         Anime::create($request->validated());
-        return redirect()->route('animes.index')->with('success', 'Anime criado com sucesso!');
+        return redirect()->route('animes.index')->with('success', 'Anime adicionado com sucesso!');
     }
-    public function Update(Request $AnimeRequest, $idAnime)
+
+    public function edit(Anime $anime)
     {
-        $anime = Anime::find($idAnime);
-        $anime->Update(['Anime'=>$AnimeRequest->Anime]);
+        return view('animes.edit', compact('anime'));
     }
-    public function destroy($idAnime)
+
+    public function update(AnimeRequest $request, Anime $anime)
     {
-        $anime = Anime::find($idAnime);
+        $anime->update($request->validated());
+        return redirect()->route('animes.index')->with('success', 'Anime atualizado com sucesso!');
+    }
+
+    public function destroy(Anime $anime)
+    {
         $anime->delete();
+        return redirect()->route('animes.index')->with('success', 'Anime removido com sucesso!');
     }
 }

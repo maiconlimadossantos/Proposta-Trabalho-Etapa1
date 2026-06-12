@@ -13,25 +13,31 @@ class NovelaController extends Controller
         return view('novelas.index', compact('novelas'));
     }
 
-    public function showall()
+    public function create()
     {
-        $novela=Novela::With('genero')->get();
-        return view('novelas.show', compact('novela'));
-    }
-    public function store(Request $NovelaRequest)
-    {
-        Novela::create($NovelaRequest->validated());
-        return redirect()->route('novelas.index')->with('success', 'Novela criada com sucesso!');
-    }
-    public function Update(Request $NovelaRequest, $idNovela)
-    {
-        $novela = Novela::find($idNovela);
-        $novela->Update(['Novela'=>$NovelaRequest->Novela]);
-    }
-    public function destroy($idNovela)
-    {
-        $novela = Novela::find($idNovela);
-        $novela->delete();
+        return view('novelas.create');
     }
 
+    public function store(Request $request)
+    {
+        Novela::create($request->all());
+        return redirect()->route('novelas.index')->with('success', 'Novela adicionada com sucesso!');
+    }
+
+    public function edit(Novela $novela)
+    {
+        return view('novelas.edit', compact('novela'));
+    }
+
+    public function update(Request $request, Novela $novela)
+    {
+        $novela->update($request->all());
+        return redirect()->route('novelas.index')->with('success', 'Novela atualizada com sucesso!');
+    }
+
+    public function destroy(Novela $novela)
+    {
+        $novela->delete();
+        return redirect()->route('novelas.index')->with('success', 'Novela removida com sucesso!');
+    }
 }
