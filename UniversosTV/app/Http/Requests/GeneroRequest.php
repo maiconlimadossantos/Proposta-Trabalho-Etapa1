@@ -25,6 +25,8 @@ class GeneroRequest extends FormRequest
         return [
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
+            'icone' => 'nullable|string|max:255',
+            'cor' => 'nullable|string|max:7',
         ];
     }
 }

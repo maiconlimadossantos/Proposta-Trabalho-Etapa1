@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GeneroController;
 
 // Rotas de Autenticação (Página de Login)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
@@ -17,4 +18,7 @@ Route::middleware('auth')->group(function () {
 
     // CRUD de Usuários (Gera automaticamente rotas para: Listagem, Adicionar, Editar e Remover)
     Route::resource('users', UserController::class);
+
+    // CRUD de Gêneros (2. LINHA ADICIONADA: Cria dinamicamente as rotas genders.index, create, store, edit, update, destroy)
+    Route::resource('genero', GeneroController::class);
 });
