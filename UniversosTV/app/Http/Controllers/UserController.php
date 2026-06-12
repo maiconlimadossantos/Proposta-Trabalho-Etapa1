@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     public function index()
@@ -12,19 +16,54 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function store(Request $UserRequest)
+    // 2. Página para Adicionar Usuário
+    public function create()
     {
-        User::create($UserRequest->validated());
-        return redirect()->route('users.index')->with('success', 'Usuario criado com sucesso!');
+        return view('users.create');
     }
-    public function Update(Request $UserRequest, $idUser)
+
+    // Ação que salva o usuário adicionado
+    public function store(UserRequest $request)
     {
-        $user = User::find($idUser);
-        $user->Update(['User'=>$UserRequest->User]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Usuário adicionado com sucesso!');
     }
-    public function destroy($idUser)
+
+    // 3. Página para Editar Usuário
+    public function edit(User $user)
     {
-        $user = User::find($idUser);
+        return view('users.edit', compact('user'));
+    }
+
+    // Ação que atualiza o usuário editado
+    public function update(UserRequest $request, User $user)
+    {
+        $data = $request->only(['name', 'email']);
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
+    }
+
+    // 4. Ação para Remover Usuário
+    public function destroy(User $user)
+    {
+        if (Auth::check() && Auth::user()->id === $user->id) {
+        if (Auth::check() && Auth::user()->id === $user->id) {
+            return redirect()->route('users.index')->with('error', 'Você não pode remover seu próprio usuário.');
+        }
+
         $user->delete();
+        return redirect()->route('users.index')->with('success', 'Usuário removido com sucesso!');
     }
+}
 }
