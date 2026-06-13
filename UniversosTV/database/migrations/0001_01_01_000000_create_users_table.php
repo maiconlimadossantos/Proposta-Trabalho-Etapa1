@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreign('perfil_id')->constrained('_perfis_da_tabela')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
