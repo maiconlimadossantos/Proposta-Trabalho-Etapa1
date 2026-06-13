@@ -15,8 +15,12 @@ class Perfil extends Model
         'is_infantil',
     ];
 
-     public function usuarios()
+    protected $casts = [
+        'is_infatil' => 'boolean',
+    ];
+
+     public function usuario()
     {
-        return $this->hasMany(User::class, 'perfil_id');
+        return $this->hasMany(User::class, 'user_id');
     }
 }

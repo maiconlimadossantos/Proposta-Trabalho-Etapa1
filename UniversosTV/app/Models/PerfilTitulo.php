@@ -17,6 +17,11 @@ class PerfilTitulo extends Model
         'avaliacao',
     ];
 
+    protected $casts = [
+        'assistido' => 'boolean',
+        'avaliacao' => 'integer',
+    ];
+
     public function perfil()
     {
         return $this->belongsTo(Perfil::class, 'perfil_id');
