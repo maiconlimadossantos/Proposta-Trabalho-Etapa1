@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('autor');
             $table->integer('ano_lancamento');
             $table->integer('Capitulos');
-            $table->foreignId('genero_id')->constrained('_generos_da_tabela')->onDelete('cascade');
-            $table->foreignId('perfiltitulo_id')->constrained('_perfiltitulo_da_tabela')->onDelete('cascade');
-            $table->times('duracao');
+            $table->integer('duracao');
             $table->boolean('legendado')->default(false);
             $table->boolean('dublado')->default(false);
             $table->boolean('disponivel')->default(true);

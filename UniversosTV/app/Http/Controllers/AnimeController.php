@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\AnimeRequest;
-use Illuminate\Http\Request;
 use App\Models\Anime;
 
 class AnimeController extends Controller
@@ -11,7 +9,7 @@ class AnimeController extends Controller
     public function index()
     {
         $animes = Anime::all();
-        return view('animes.index', compact('animes'));
+        return view('dashboard', compact('dashboard'));
     }
 
     public function create()

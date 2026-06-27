@@ -15,13 +15,17 @@ use App\Http\Controllers\NovelaController; // Importação adicionada
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/Cadastrarusuario', [AuthController::class, 'create'])->name('CadastrarUsuario')->middleware('guest');
+Route::post('/users', [UserController::class, 'Usercreate'])->name('CadastrarUsuario');
 
 // Rotas Protegidas do Sistema
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
-    Route::resource('profiles', PerfilController::class);
-    Route::resource('profile-titles', PerfilTituloController::class);
+
+
+    Route::resource('perfil', PerfilController::class);
+    Route::resource('perfilTitulo', PerfilTituloController::class);
 
     // CRUD de Animes adicionado ao escopo protegido
     Route::resource('animes', AnimeController::class);
@@ -34,5 +38,5 @@ Route::middleware('auth')->group(function () {
 
     //CRUD de Novelas adicionado ao escopo protegido
     Route::resource('novelas', NovelaController::class);
-    
+
 });

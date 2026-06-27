@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('_perfis_da_tabela', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreign('perfil_id')->constrained('_perfiltitulo_da_tabela')->onDelete('cascade');
             $table->string('nome');
             $table->string('avatar')->nullable();
             $table->boolean('is_infatil')->default(false);

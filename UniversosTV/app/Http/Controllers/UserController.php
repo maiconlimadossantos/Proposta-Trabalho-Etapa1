@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +19,7 @@ class UserController extends Controller
     // 2. Página para Adicionar Usuário
     public function create()
     {
-        return view('users.create');
+        return view('CadastrarUsuario');
     }
 
     // Ação que salva o usuário adicionado
@@ -31,7 +31,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuário adicionado com sucesso!');
+        return redirect()->route('Listagemusuario')->with('success', 'Usuário adicionado com sucesso!');
     }
 
     // 3. Página para Editar Usuário

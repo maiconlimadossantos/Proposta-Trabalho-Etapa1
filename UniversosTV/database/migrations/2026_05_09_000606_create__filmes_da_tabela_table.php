@@ -17,8 +17,6 @@ return new class extends Migration
             $table->text('descricao');
             $table->string('diretor');
             $table->integer('ano_lancamento');
-            $table->foreignId('genero_id')->constrained('_generos_da_tabela')->onDelete('cascade');
-            $table->foreignId('perfiltitulo_id')->constrained('_perfiltitulo_da_tabela')->onDelete('cascade');
             $table->time('duracao');
             $table->boolean('legendado')->default(false);
             $table->boolean('dublado')->default(false);

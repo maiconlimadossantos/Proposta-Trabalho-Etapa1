@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PerfilTituloRequest;
 use App\Models\Perfil;
 use App\Models\PerfilTitulo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 
 class PerfilTituloController extends Controller
 {
@@ -137,4 +135,5 @@ class PerfilTituloController extends Controller
 
         return redirect()->route('profile-titles.index')->with('success', 'Vínculo removido do histórico!');
     }
+
 }
